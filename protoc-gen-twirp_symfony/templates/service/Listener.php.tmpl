@@ -15,7 +15,7 @@ use Modix\TwirpBundle\Twirp\ServiceInterface;
  *
  * Generated from protobuf service <code>{{ .Service.Desc.Name }}</code>
  */
-final class {{ .Service | phpServiceName .File }}EventSubscriber extends AbstractServiceHandler
+final class {{ .Service | phpServiceName .File }}EventSubscriber extends AbstractServiceListener
 {
     /**
      * @param {{ .Service | phpServiceName .File }}Interface $service
@@ -26,7 +26,7 @@ final class {{ .Service | phpServiceName .File }}EventSubscriber extends Abstrac
     public function __construct(
         private readonly {{ .Service | phpServiceName .File }}Interface $service,
         protected readonly string $prefix = '/twirp',
-        protected readonly ?string $packageName = '{{ .File.Proto.GetPackage }}',
+        protected readonly string $packageName = '{{ .File.Proto.GetPackage }}',
         protected readonly string $serviceName = '{{ .Service.Desc.Name }}'
     ) {
     }
@@ -61,6 +61,7 @@ final class {{ .Service | phpServiceName .File }}EventSubscriber extends Abstrac
      * @param Message $input
      *
      * @return Message|null
+     * @throws \Twirp\Error
      */
     public function callMethod(string $method, array $ctx, Message $input): ?Message
     {
