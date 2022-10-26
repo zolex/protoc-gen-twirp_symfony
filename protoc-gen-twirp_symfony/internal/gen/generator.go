@@ -46,7 +46,7 @@ func Generate(plugin *protogen.Plugin, version string) error {
 					"%s/%s%s",
 					php.Path(file),
 					php.ServiceName(file, svc),
-					strings.Replace(tpl.Name(), "_Service_", "", -1),
+					tpl.Name(),
 				)
 				fileName = strings.TrimSuffix(fileName, ".tmpl")
 
