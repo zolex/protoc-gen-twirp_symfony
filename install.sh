@@ -338,9 +338,9 @@ End of functions from https://github.com/client9/shlib
 ------------------------------------------------------------------------
 EOF
 
-PROJECT_NAME="twirp"
-OWNER=twirphp
-REPO="twirp"
+PROJECT_NAME="protoc-gen-twirp_symfony"
+OWNER=zolex
+REPO="protoc-gen-twirp_symfony"
 BINARY=protoc-gen-twirp_symfony
 FORMAT=tar.gz
 OS=$(uname_os)
