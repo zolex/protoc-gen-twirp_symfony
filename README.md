@@ -4,6 +4,11 @@
 
 Download prebuilt binaries for the protoc plugin from the [releases](https://github.com/zolex/protoc-gen-twirp_symfony) page.
 
+Alternatively, you can use the following oneliner to install the plugin:
+
+```bash
+curl -Ls https://raw.githubusercontent.com/zolex/protoc-gen-twirp_symfony/master/install.sh | bash -s -- -b path/to/bin
+```
 
 ## Documentation
 
