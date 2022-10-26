@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.3', '7.4', '8.0', '8.1']
+
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.17
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v2
+
+      - name: Set up Problem Matchers for PHPUnit
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Download Go dependencies
+        run: go mod download
+
+      - name: Download tool dependencies
+        run: make deps
+
+      - name: Download PHP dependencies
+        run: composer update --no-interaction --no-progress
+
+      - name: Lint
+        run: make lint
+        env:
+          LINT_ARGS: --out-format=github-actions
+
+      - name: Test
+        run: make test
