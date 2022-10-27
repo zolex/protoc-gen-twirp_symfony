@@ -38,9 +38,8 @@ lint: ## Run linter
 	golangci-lint run ${LINT_ARGS}
 
 .PHONY: generate
-generate: build ## Generate example and clientcompat files
+generate: build ## Generate example
 	@mkdir -p example/generated
-	@mkdir -p clientcompat/generated
 	protoc -I ./example/ --plugin=protoc-gen-twirp_symfony=build/protoc-gen-twirp_symfony --twirp_symfony_out=example/generated/ --php_out=example/generated/ service.proto
 
 # Dependency versions
