@@ -1,4 +1,6 @@
-# Twirp Symfony: Port of [TwirPHP](https://github.com/twirphp/twirp) for Symfony
+# Protoc Plugin for Twirp Symfony
+
+This project is based on [TwirPHP](https://github.com/twirphp/twirp) but generates code which seamlessly integrates with Symfony.
 
 ## Installation
 
@@ -10,50 +12,24 @@ Alternatively, you can use the following oneliner to install the plugin:
 curl -Ls https://raw.githubusercontent.com/zolex/protoc-gen-twirp_symfony/master/install.sh | bash -s -- -b path/to/bin
 ```
 
-## Documentation
+## Generate Code
 
-See the [official documentation](https://twirphp.github.io/).
-
-
-## Development
-
-Install dependencies:
-
-```shell
-go mod download
-composer install
+```bash
+export PROTO_PATH=path/to/proto
+export OUTPUT_PATH=path/to/output_dir
+/usr/bin/protoc $(shell find ${PROTO_PATH} -type f -name "*.proto") \
+    --php_out=${OUTPUT_PATH} \
+    --twirp_symfony_out=${OUTPUT_PATH} \
+    --plugin=protoc-gen-twirp_symfony=/usr/local/bin/protoc-gen-twirp_symfony \
+    --proto_path ${PROTO_PATH} \
+    --proto_path /usr/include
 ```
 
-If you change something in the protoc plugin, regenerate the examples:
+## Create a project
 
-```shell
-make generate
+The generated code of this plugin needs the modix/twirp-bundle to run. View the [bundle docs](https://github.com/modix/TwirpBundle) for details on setting it up.
+
+```bash
+symfony new my-project
+composer require modix/twirp-bundle
 ```
-
-When all coding and testing is done, please run the test suite:
-
-```shell
-make check
-```
-
-For the best developer experience, install [Nix](https://builtwithnix.org/) and [direnv](https://direnv.net/).
-
-Alternatively, install the following dependencies manually:
-
-- Go >=1.17
-- PHP 8.x
-- Composer 2.x
-
-Then run `make deps` to install the remaining dependencies.
-
-
-## Security
-
-If you discover any security related issues, please contact us at [twirphp@sagikazarmark.dev](mailto:twirphp@sagikazarmark.dev).
-
-
-## License
-
-The project is licensed under the [MIT License](LICENSE).
-
-The original Twirp library is licensed under the Apache 2.0 License.
