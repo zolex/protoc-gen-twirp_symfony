@@ -19,6 +19,7 @@ func TxtFuncMap() template.FuncMap {
 	funcMap["phpNamespace"] = php.Namespace
 	funcMap["phpServiceName"] = php.ServiceName
 	funcMap["phpMessageName"] = php.MessageName
+	funcMap["phpShortMessageName"] = php.ShortMessageName
 
 	return funcMap
 }

@@ -7,7 +7,12 @@ declare(strict_types=1);
 namespace {{ .File | phpNamespace }};
 
 use Google\Protobuf\Internal\Message;
+use Modix\TwirpBundle\Twirp\Error;
 use Modix\TwirpBundle\Twirp\ServiceInterface;
+{{- range $method := .Service.Methods }}
+use {{ $method.Input | phpMessageName $.File }};
+use {{ $method.Output | phpMessageName $.File }};
+{{ end -}}
 
 /**
  *{{ .Service.Comments.Leading | protoSplitComments | join "\n *" }}
@@ -17,14 +22,13 @@ use Modix\TwirpBundle\Twirp\ServiceInterface;
 interface {{ .Service | phpServiceName .File }}Interface extends ServiceInterface
 {
 {{- range $method := .Service.Methods }}
-{{- $inputType := $method.Input | phpMessageName $.File }}
     /**
      *{{ $method.Comments.Leading | protoSplitComments | join "\n     *" }}
      *
      * Generated from protobuf method <code>{{ $method | protoMethodFullName }}</code>
      *
-     * @throws \Twirp\Error
+     * @throws Error
      */
-    public function {{ $method.Desc.Name }}(array $ctx, {{ $inputType }} $req): {{ $method.Output | phpMessageName $.File }}|Message;
+    public function {{ $method.Desc.Name }}(array $ctx, {{ $method.Input | phpShortMessageName $.File }} $in): {{ $method.Output | phpShortMessageName $.File }}|Message;
 {{ end -}}
 }
