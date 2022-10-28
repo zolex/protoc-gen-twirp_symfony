@@ -25,9 +25,9 @@ final class {{ .Service | phpServiceName .File }}Client extends AbstractClient i
     /**
      * {@inheritdoc}
      */
-    public function {{ $method.Desc.Name }}(array $ctx, {{ $method.Input | phpShortMessageName $.File }} $req): {{ $method.Output | phpShortMessageName $.File }}|Message
+    public function {{ $method.Desc.Name }}(array $ctx, {{ $method.Input | phpShortMessageName $.File }} $input): {{ $method.Output | phpShortMessageName $.File }}|Message
     {
-        return $this->sendRequest('{{ $.File.Proto.GetPackage }}', '{{ $.Service.Desc.Name }}', '{{ $method.Desc.Name }}', $ctx, $req, new {{ $method.Output | phpShortMessageName $.File }}());
+        return $this->sendRequest('{{ $.File.Proto.GetPackage }}', '{{ $.Service.Desc.Name }}', '{{ $method.Desc.Name }}', $ctx, $input, new {{ $method.Output | phpShortMessageName $.File }}());
     }
 {{ end }}
 }

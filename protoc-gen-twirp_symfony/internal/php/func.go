@@ -133,10 +133,13 @@ func MessageName(file *protogen.File, message *protogen.Message) string {
 	className := string(message.Desc.Name())
 	parentFile := message.Desc.ParentFile()
 
-	return "\\" + namespacedName(classNamePrefix(className, parentFile)+className, parentFile)
+	return namespacedName(classNamePrefix(className, parentFile)+className, parentFile)
 }
 
 // ShortMessageName gets only the classname
 func ShortMessageName(file *protogen.File, message *protogen.Message) string {
-	return string(message.Desc.Name())
+	className := string(message.Desc.Name())
+	parentFile := message.Desc.ParentFile()
+
+	return classNamePrefix(className, parentFile)+className
 }

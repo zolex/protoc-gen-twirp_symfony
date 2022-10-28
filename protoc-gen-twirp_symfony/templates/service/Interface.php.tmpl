@@ -29,6 +29,6 @@ interface {{ .Service | phpServiceName .File }}Interface extends ServiceInterfac
      *
      * @throws Error
      */
-    public function {{ $method.Desc.Name }}(array $ctx, {{ $method.Input | phpShortMessageName $.File }} $in): {{ $method.Output | phpShortMessageName $.File }}|Message;
+    public function {{ $method.Desc.Name }}(array $ctx, {{ $method.Input | phpShortMessageName $.File }} $input): {{ $method.Output | phpShortMessageName $.File }}|Message;
 {{ end -}}
 }
