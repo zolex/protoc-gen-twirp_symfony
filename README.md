@@ -10,7 +10,7 @@ The easiest way to generate the code is by using the prebuilt docker image:
 docker run \
   --volume /path/to/local/proto-dir:/var/proto \
   --volume /path/to/local/output-dir:/protoc/symfony/out \
-  --rm zolex/protoc.twirp \
+  --rm zolex/protoc-gen-twirp_symfony:latest \
   make symfony
 ```
 
