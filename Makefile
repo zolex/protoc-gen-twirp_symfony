@@ -40,7 +40,8 @@ lint: ## Run linter
 .PHONY: generate
 generate: build ## Generate example
 	@mkdir -p example/generated
-	protoc -I ./example/ --plugin=protoc-gen-twirp_symfony=build/protoc-gen-twirp_symfony --twirp_symfony_out=example/generated/ --php_out=example/generated/ $(shell find example -type f -name "*.proto")
+	protoc -I ./example/ --plugin=protoc-gen-twirp_symfony=build/protoc-gen-twirp_symfony --twirp_symfony_out=example/generated/ --php_out=example/generated/ service.proto
+	protoc -I ./example/ --plugin=protoc-gen-twirp_symfony=build/protoc-gen-twirp_symfony --twirp_symfony_out=example/generated/ --php_out=example/generated/ $(shell find example/proto -type f -name "*.proto")
 
 # Dependency versions
 TWIRP_VERSION = v8.1.0
