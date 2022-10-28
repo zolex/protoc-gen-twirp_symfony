@@ -15,7 +15,7 @@ use Modix\TwirpBundle\Client\AbstractClient;
  *
  * Generated from protobuf service <code>ExampleService</code>
  */
-final class ExampleServiceClient extends AbstractClient implements {{ .Service | phpServiceName .File }}Interface
+final class {{ .Service | phpServiceName .File }}Client extends AbstractClient implements {{ .Service | phpServiceName .File }}Interface
 {
 {{ range $method := .Service.Methods }}
     {{- $inputType := $method.Input | phpMessageName $.File }}
