@@ -9,9 +9,6 @@ namespace {{ .File | phpNamespace }};
 use Google\Protobuf\Internal\Message;
 use Modix\TwirpBundle\EventListener\AbstractServiceListener;
 use Modix\TwirpBundle\Twirp\Error;
-{{- range $method := .Service.Methods }}
-use {{ $method.Input | phpMessageName $.File }};
-{{ end -}}
 
 /**
  * @see {{ .Service | phpServiceName .File }}Interface
@@ -43,7 +40,7 @@ final class {{ .Service | phpServiceName .File }}Listener extends AbstractServic
     {
         return match ($method) {
 {{- range $method := .Service.Methods }}
-            '{{ $method | protoMethodShortName }}' => new {{ $method.Input | phpShortMessageName $.File }}(),
+            '{{ $method | protoMethodShortName }}' => new {{ $method.Input | phpMessageName $.File }}(),
 {{- end }}
             default => null,
         };

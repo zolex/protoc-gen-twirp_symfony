@@ -133,6 +133,14 @@ func MessageName(file *protogen.File, message *protogen.Message) string {
 	className := string(message.Desc.Name())
 	parentFile := message.Desc.ParentFile()
 
+	return "\\" + namespacedName(classNamePrefix(className, parentFile)+className, parentFile)
+}
+
+// MessageName transforms a message name into a PHP compatible one.
+func IncludeMessageName(file *protogen.File, message *protogen.Message) string {
+	className := string(message.Desc.Name())
+	parentFile := message.Desc.ParentFile()
+
 	return namespacedName(classNamePrefix(className, parentFile)+className, parentFile)
 }
 
