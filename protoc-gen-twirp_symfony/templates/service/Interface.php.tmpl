@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace {{ .File | phpNamespace }};
 
+use Google\Protobuf\Internal\Message;
 use Modix\TwirpBundle\Twirp\ServiceInterface;
 
 /**
@@ -24,6 +25,6 @@ interface {{ .Service | phpServiceName .File }}Interface extends ServiceInterfac
      *
      * @throws \Twirp\Error
      */
-    public function {{ $method.Desc.Name }}(array $ctx, {{ $inputType }} $req): {{ $method.Output | phpMessageName $.File }};
+    public function {{ $method.Desc.Name }}(array $ctx, {{ $inputType }} $req): {{ $method.Output | phpMessageName $.File }}|Message;
 {{ end -}}
 }
