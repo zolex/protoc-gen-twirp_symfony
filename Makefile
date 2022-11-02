@@ -30,8 +30,6 @@ check: test lint ## Run checks (tests and linters)
 test: export CGO_ENABLED=1
 test: build ## Run tests
 	gotestsum --no-summary=skipped --junitfile ${BUILD_DIR}/coverage-go.xml --jsonfile ${BUILD_DIR}/test.json --format short -- -race -coverprofile=${BUILD_DIR}/coverage-go.txt -covermode=atomic ./protoc-gen-twirp_symfony/...
-	XDEBUG_MODE=coverage lib/vendor/bin/phpunit -v --coverage-clover ${BUILD_DIR}/coverage-php.xml
-	@for d in tests/*/ ; do echo "Running tests in $$d"; $$d/run.sh; done
 
 .PHONY: lint
 lint: ## Run linter
@@ -39,9 +37,10 @@ lint: ## Run linter
 
 .PHONY: generate
 generate: build ## Generate example
+	@rm -rf example/generated
 	@mkdir -p example/generated
 	protoc -I ./example/ --plugin=protoc-gen-twirp_symfony=build/protoc-gen-twirp_symfony --twirp_symfony_out=example/generated/ --php_out=example/generated/ service.proto
-	protoc -I ./example/ --plugin=protoc-gen-twirp_symfony=build/protoc-gen-twirp_symfony --twirp_symfony_out=example/generated/ --php_out=example/generated/ $(shell find example/proto -type f -name "*.proto")
+	#protoc -I ./example/ --plugin=protoc-gen-twirp_symfony=build/protoc-gen-twirp_symfony --twirp_symfony_out=example/generated/ --php_out=example/generated/ $(shell find example/proto -type f -name "*.proto")
 
 # Dependency versions
 TWIRP_VERSION = v8.1.3

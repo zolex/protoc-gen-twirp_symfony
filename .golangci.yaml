@@ -1,0 +1,4 @@
+run:
+    skip-files:
+        - protoc-gen-twirp_symfony/internal/php/func.go
+        - protoc-gen-twirp_symfony/main.go
