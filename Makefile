@@ -44,10 +44,10 @@ generate: build ## Generate example
 	protoc -I ./example/ --plugin=protoc-gen-twirp_symfony=build/protoc-gen-twirp_symfony --twirp_symfony_out=example/generated/ --php_out=example/generated/ $(shell find example/proto -type f -name "*.proto")
 
 # Dependency versions
-TWIRP_VERSION = v8.1.0
-PROTOC_VERSION = 3.15.8
-GOTESTSUM_VERSION = 1.7.0
-GOLANGCI_VERSION = 1.38.0
+TWIRP_VERSION = v8.1.3
+PROTOC_VERSION = 3.20.3
+GOTESTSUM_VERSION = 1.8.2
+GOLANGCI_VERSION = 1.50.1
 
 deps: bin/clientcompat bin/gotestsum bin/golangci-lint bin/protoc
 
